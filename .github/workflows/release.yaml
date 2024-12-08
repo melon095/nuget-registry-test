@@ -1,0 +1,42 @@
+name: Publish .NET Packages to NuGet
+
+on:
+  release:
+    types:
+      - published
+
+env:
+  NET_VERSION: 8.0
+
+jobs:
+  publish:
+    name: Publish .NET Packages
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ env.NET_VERSION }}
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build project
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Pack NuGet packages
+      run: dotnet pack --configuration Release --no-build --output ./nupkgs
+
+    - name: Publish NuGet packages to GitHub Package Registry
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        for package in ./nupkgs/*.nupkg; do
+          dotnet nuget push "$package" \
+            --api-key $GITHUB_TOKEN \
+            --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json";
+        done
