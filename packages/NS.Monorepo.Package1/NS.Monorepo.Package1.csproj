@@ -11,6 +11,7 @@
 	<RepositoryUrl>https://github.com/melon095/nuget-registry-test</RepositoryUrl>
 	<RepositoryType>git</RepositoryType>
 	<IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>
