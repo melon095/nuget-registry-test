@@ -4,6 +4,13 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	<PackageId>NS.Monorepo.Package1</PackageId>
+	<Version>1.0.0</Version>
+	<Authors>melon095</Authors>
+	<PackageDescription>Foo</PackageDescription>
+	<RepositoryUrl>https://github.com/melon095/nuget-registry-test</RepositoryUrl>
+	<RepositoryType>git</RepositoryType>
+	<IncludeSymbols>true</IncludeSymbols>
   </PropertyGroup>
 
   <ItemGroup>
