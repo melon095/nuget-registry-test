@@ -32,6 +32,9 @@ jobs:
       run: dotnet pack --configuration Release --no-build --output ./nupkgs
 
     - name: Publish NuGet packages to GitHub Package Registry
+      permissions:
+        contents: read
+        packages: write
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
